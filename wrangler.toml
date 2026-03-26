@@ -1,0 +1,37 @@
+# Echo TexasFile Scraper — Authenticated TexasFile.com document enrichment
+# Enriches ShadowGlass D1 deed_records with full legal descriptions from TexasFile
+name = "echo-texasfile-scraper"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+
+[vars]
+WORKER_VERSION = "1.0.0"
+ENVIRONMENT = "production"
+TEXASFILE_BASE_URL = "https://www.texasfile.com"
+MAX_REQUESTS_PER_MINUTE = "30"
+REQUEST_DELAY_MS = "2000"
+
+# Own D1 for tracking enrichment progress
+[[d1_databases]]
+binding = "DB"
+database_name = "echo-texasfile-scraper"
+database_id = "7c50467a-43ef-44c4-bf2b-862e386e0a72"
+
+# KV for session storage (csrftoken + sessionid with TTL)
+[[kv_namespaces]]
+binding = "SESSION"
+id = "334bf72b31a84fedbfa5b442558b650e"
+
+# Service binding to ShadowGlass for D1 updates
+[[services]]
+binding = "SHADOWGLASS"
+service = "shadowglass-v8-warpspeed"
+
+# Secrets (set via wrangler secret put):
+# ECHO_API_KEY           — Worker auth key
+# TEXASFILE_EMAIL        — TexasFile login email
+# TEXASFILE_PASSWORD     — TexasFile login password
+# PROXY_HOST             — IPRoyal proxy host (geo.iproyal.com)
+# PROXY_PORT             — IPRoyal proxy port (12321)
+# PROXY_USER             — IPRoyal proxy username
+# PROXY_PASS             — IPRoyal proxy password

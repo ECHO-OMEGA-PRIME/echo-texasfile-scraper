@@ -1,0 +1,21 @@
+{
+  "name": "echo-texasfile-scraper",
+  "version": "1.0.0",
+  "description": "ECHO PRIME TexasFile.com Scraper — Authenticated document detail enrichment for ShadowGlass D1 deed records | Legal description extraction | Batch county enrichment",
+  "author": "Echo Prime Technologies <bob@echo-op.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail"
+  },
+  "dependencies": {
+    "hono": "^4.0.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0",
+    "@cloudflare/workers-types": "^4.20250124.0",
+    "typescript": "^5.5.0"
+  }
+}
