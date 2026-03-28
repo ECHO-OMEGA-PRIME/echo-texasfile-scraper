@@ -1698,6 +1698,16 @@ async function fetchSeeInstrumentRecords(
 // ═══════════════════════════════════════════════════════════════════
 
 const app = new Hono<{ Bindings: Env }>();
+// Security headers middleware
+app.use('*', async (c, next) => {
+  await next();
+  c.res.headers.set('X-Content-Type-Options', 'nosniff');
+  c.res.headers.set('X-Frame-Options', 'DENY');
+  c.res.headers.set('X-XSS-Protection', '1; mode=block');
+  c.res.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  c.res.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+});
+
 
 // ─── CORS (restricted to known origins) ───────────────────────────
 const ALLOWED_ORIGINS = ['https://echo-ept.com', 'https://echo-op.com', 'https://www.echo-ept.com', 'https://www.echo-op.com', 'http://localhost:3000', 'http://localhost:3001'];
