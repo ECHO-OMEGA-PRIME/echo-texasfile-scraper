@@ -35,3 +35,7 @@ service = "shadowglass-v8-warpspeed"
 # PROXY_PORT             — IPRoyal proxy port (12321)
 # PROXY_USER             — IPRoyal proxy username
 # PROXY_PASS             — IPRoyal proxy password
+
+[[analytics_engine_datasets]]
+binding = "ANALYTICS"
+dataset = "echo_metrics"
