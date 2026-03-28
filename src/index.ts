@@ -1718,6 +1718,8 @@ app.use('*', async (c, next) => {
 app.options('*', (c) => c.text('', 204));
 
 // ─── HEALTH ────────────────────────────────────────────────────────
+app.get("/", (c) => c.json({ service: 'echo-texasfile-scraper', status: 'operational' }));
+
 app.get('/health', async (c) => {
   const env = c.env;
   let dbOk = false;
